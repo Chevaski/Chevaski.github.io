@@ -9,6 +9,12 @@
 
 set -u
 
+# Docker Desktop doesn't always add its command-line tools to PATH.
+for p in "$HOME/.docker/bin" /Applications/Docker.app/Contents/Resources/bin /usr/local/bin; do
+  [ -x "$p/docker" ] && PATH="$PATH:$p"
+done
+export PATH
+
 BASE="$HOME/client-tools"
 CREDS="$BASE/CREDENTIALS.txt"
 RESULTS=()
